@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>室内环境多维控制系统</title>
+		<script src="./js/vue.js"></script>
+	    <script src="./js/vue-router.js"></script>
+	    <script src="./js/element-ui.js"></script>
+	    <script src='./js/jquery-3.0.0.min.js'></script>
+	    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+	    <link rel="stylesheet" href="./css/element-ui.css">
+	    <link rel="stylesheet" href="./css/animate.css"> 
+	    <style>
+	    	*{
+	            margin: 0px;           
+	        }
+	        .header{
+	            background-color: #448db8;
+	            height: 65px;
+	            line-height: 65px;
+	            font-size: 20px;
+	            color: #FFF;
+	            text-align: center
+	        }
+	        body{
+	        	background-image: url('./img/b2.jpg');
+	        	background-repeat:no-repeat;
+	        	background-size: cover;
+	        }
+	        
+	        .right{
+	        	margin-top: 60%;
+	        	margin-left: 5%;
+	        	font-size: 40px;
+	        	color: #F7BA2A;
+	        }
+	        .Sright{
+	        	font-size: 30px;
+	        	margin-top: 10%;
+	        	margin-bottom: 20%;
+	        	color: #DEA726;
+	        }
+	        .left{
+	        	margin-top: 20%;
+	        	color: #FFFFFF;
+	        }
+			.table{
+				margin-top: 20%;
+				border: 2px solid #DEA726;
+				/*padding: 10px;*/
+				border-collapse: collapse;
+			} 
+			.table tr{
+				height:45px;
+							
+			} 
+			.table tr td{
+				width: 15%;
+				padding: 10px;	
+				border: 2px solid #DEA726;
+				text-align: center;
+			}
+			.imgtable{
+				border-collapse: collapse;
+				width: 90%;
+			}
+			.imgtable tr td{
+				background-clip: border-box;
+	        	background-repeat:round;
+	        	background-attachment: scroll;
+				height: 250px;
+			}
+			.imgA{
+				background-image: url('./img/1.gif');
+			}
+			.imgB{
+				background-image: url('./img/2.gif');
+			}
+			.imgC{
+				background-image: url('./img/3.gif');
+				/*height: 280px;*/
+			}
+			.imgD{
+				background-image: url('./img/4.gif');
+				/*height: 280px;*/
+			}
+			.imgE{
+				background-image: url('./img/5.gif');
+				/*height: 280px;*/
+			}
+			.btn1{
+				background-color: #11B95C;
+			}
+			.btn{
+				background-color: #E64242;
+			}
+	    </style>
+	</head>
+	<body>
+		<div id="app">
+			<el-row>
+            	<div class="header">室内环境多维控制</div>
+            	
+        	</el-row>
+			<el-row>
+            	<el-menu
+				  :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#ccc" active-text-color="#ffd04b">
+				  <el-menu-item index="1">
+				  	<!--<i class="el-icon-menu"></i>-->
+				  	<router-link to='/First'>首页</router-link>
+				  </el-menu-item>
+				  <el-menu-item index="2">
+				  	<!--<i class="el-icon-message"></i>-->
+				  	<router-link to='/Second'>您的家具设备</router-link>
+				  </el-menu-item>
+				  <el-submenu index="3">
+				    <template slot="title"><router-link to='/Three'>环境控制</router-link></template>
+				    <el-menu-item index="2-1">温度</el-menu-item>
+				    <el-menu-item index="2-2">湿度</el-menu-item>
+				    <el-menu-item index="2-3">二氧化碳</el-menu-item>
+				    <el-menu-item index="2-4">光照强度</el-menu-item>
+				  </el-submenu>
+				</el-menu>
+        	</el-row>
+        <el-row class="tac">    
+        	
+                <router-view></router-view>               
+        </el-row> 
+
+		</div>
+		<script>
+			var First={
+	           template:`
+	            <div>
+	                <el-row>
+					  	<el-col :span="8" :offset="16">
+					  		<div class="right" >
+					  			欢迎来到室内环境多维控制系统
+					  		</div>
+			                
+			          	</el-col>
+					</el-row>       
+	            </div>
+	            `,
+	        };
+			
+			var Second={
+	           template:`
+	            <div>
+	                <el-row>
+	                	<el-col :span="8">
+					  		<div class="left" >	
+					  			<el-row>
+					  				<el-col :span="18" :offset="6">
+					  				
+										<table class="table">
+                                        	<tr>
+                                            	<td>射灯</td>
+                                                <td>
+                                                	<button type="button" class="btn1" @click="buttonA">开</button>
+                                                	<button type="button" class="btn" @click="buttonB">关</button>
+												</td>
+												 <td>呼吸灯</td>
+                                                <td>
+                                                	<button type="button" class="btn1" @click="buttonC">开</button>
+                                                	<button type="button" class="btn" @click="buttonD">关</button>
+												</td>
+                                            </tr>
+                                            <tr>
+												<td>车库</td>
+                                                <td>
+                                                	<button type="button" class="btn1" @click="buttonE">开</button>
+                                                	<button type="button" class="btn" @click="buttonF">关</button>
+												</td>
+												<td>中央空调</td>
+                                            	<td>
+                                            		<button type="button" class="btn1" @click="buttonG">开</button>
+                                                	<button type="button" class="btn" @click="buttonH">关</button>
+                                           		</td>
+                                            </tr>
+                                            <tr>
+                                            	<td>窗帘</td>
+                                                <td>
+                                                	<button type="button" class="btn1" @click="buttonM">升</button>
+                                                	<button type="button" class="btn" @click="buttonL">降</button>
+												</td>
+                                            	<td>门锁</td>
+                                            	<td>
+                                            		<button type="button" class="btn1" @click="buttonW">开</button>
+                                            		<button type="button" class="btn" @click="buttonN">关</button>
+                                           		</td>
+                                            </tr>
+                                            
+                                        </table>
+						  			</el-col>
+					  			</el-row>
+					  		</div>
+			                
+			          	</el-col>
+					  	<el-col :span="14" :offset="2">
+					  		<el-row>
+					  			<el-col :span="10" :offset="14">
+					  				<div class="Sright" >
+					  				欢迎来到室内环境多维控制系统
+					  				</div>
+					  			<el-col>
+					  			
+			                </el-row>					  		
+			                <el-row>
+				                <table class="imgtable">
+	                                <tr>
+	                                    <td class="imgA" colspan="2" :style='note'></td>
+	                                    <td class="imgB"></td>													
+	                                </tr>
+	                                <tr>
+										<td class="imgC"></td>
+	                                    <td class="imgD"></td>
+	                                    <td class="imgE"></td>
+	                                </tr>
+	                            </table>
+			                </el-row>
+			          	</el-col>
+					</el-row>       
+	            </div>
+	            `,
+	            data:function(){
+	            	return{
+	            	}
+	            },
+	            
+	            methods: {
+					buttonA:function(){
+						var vm=this;
+						var url="http://localhost:3000/upp/findByName?name="+'she';
+                        $.getJSON(url,function(result){
+                        	var c=result[0].ups; 
+                        	var a=result[0].tian;
+                        	var b=result[0].qi; 
+							 var e=$('.imgB').css('background-image','url('+b+')');
+							 var f=$('.imgD').css('background-image','url('+c+')');  
+							 var b=$('.imgA').css('background-image','url('+a+')');                       
+                        });
+						
+					},
+					buttonB:function(){
+						var vm=this;
+						var url="http://localhost:3000/down/findByName?name="+'she';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].tian;
+                        	var b=result[0].qi; 
+                        	var c=result[0].downs; 
+							 var d=$('.imgA').css('background-image','url(img/'+a+')');
+							 var e=$('.imgB').css('background-image','url(img/'+b+')');
+							 var f=$('.imgD').css('background-image','url(img/'+c+')');  
+                      
+                        });
+					},
+					buttonC:function(){
+						var vm=this;
+						var url="http://localhost:3000/upp/findByName?name="+'hu';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].tian;
+                        	var b=result[0].qi; 
+                        	var c=result[0].ups;
+                        	console.log(a);
+                        	console.log(b);
+                        	console.log(c);
+							 var d=$('.imgA').css('background-image','url(img/'+a+')');
+							 var e=$('.imgB').css('background-image','url(img/'+b+')');
+							 var f=$('.imgD').css('background-image','url(img/'+c+')');  
+                      
+                        });
+					},
+					buttonD:function(){
+						var vm=this;
+						var url="http://localhost:3000/down/findByName?name="+'hu';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].tian;
+                        	var b=result[0].qi; 
+                        	var c=result[0].downs; 
+							 var d=$('.imgA').css('background-image','url(img/'+a+')');
+							 var e=$('.imgB').css('background-image','url(img/'+b+')');
+							 var f=$('.imgD').css('background-image','url(img/'+c+')');  
+                      
+                        });
+					},
+					buttonE:function(){
+						var vm=this;
+						var url="http://localhost:3000/upp/findByName?name="+'che';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].ups; 
+							 var d=$('.imgE').css('background-image','url(img/'+a+')');
+                        });
+					},
+					buttonF:function(){
+						var vm=this;
+						var url="http://localhost:3000/down/findByName?name="+'che';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].downs; 
+							 var d=$('.imgE').css('background-image','url(img/'+a+')');
+                        });
+					},
+					buttonG:function(){
+						var vm=this;
+						var url="http://localhost:3000/upp/findByName?name="+'kong';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].ups; 
+							var d=$('.imgC').css('background-image','url(img/'+a+')');
+                        });
+					},
+					buttonH:function(){
+						var vm=this;
+						var url="http://localhost:3000/down/findByName?name="+'kong';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].downs; 
+							var d=$('.imgC').css('background-image','url(img/'+a+')');
+                        });
+					},
+					buttonM:function(){
+						var url="http://localhost:3000/upp/findByName?name="+'chuang';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].ups; 
+							var d=$('.imgD').css('background-image','url(img/'+a+')');
+                        });
+					},
+					buttonL:function(){						
+						var url="http://localhost:3000/down/findByName?name="+'chuang';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].downs; 
+							var d=$('.imgD').css('background-image','url(img/'+a+')');
+                        });
+					},
+					buttonW:function(){
+						var url="http://localhost:3000/upp/findByName?name="+'men';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].ups; 
+							var d=$('.imgC').css('background-image','url(./img/'+a+')');
+                        });
+					},
+					buttonN:function(){
+						var url="http://localhost:3000/down/findByName?name="+'men';
+                        $.getJSON(url,function(result){
+                        	var a=result[0].downs; 
+							var d=$('.imgC').css('background-image','url(./img/'+a+')');
+                        });
+					}
+			    },
+		    
+	        };
+			
+			var Three={
+				template:`
+                <div>
+	                <el-row>
+	                	<el-col :span="14" :offset="10">
+	                    	<el-row>
+						  		<el-col :span="10" :offset="14">
+						  			<div class="Sright" >
+						  			欢迎来到室内环境多维控制系统
+						  			</div>
+						  		<el-col>					  			
+				        	</el-row> 
+				        </el-col> 
+				    </el-row>
+				    <el-row>
+				    	<div id="main" style="height:600px"></div>
+				    </el-row>
+                </div>
+             `,
+             	created:function(){},
+             	methods:{
+
+             	}
+              
+              
+					
+			}
+			
+			
+			
+			
+			
+			var router=new VueRouter({
+				routes:[{
+                path:'/First',
+			    component:First,
+
+            },{
+            	path:'/Second',
+            	component:Second,
+            },{
+            	path:'/Three',
+            	component:Three,
+            }]
+			});
+			new Vue({
+				el:'#app',
+				router:router,
+				data() {
+			      return {
+			        activeIndex: '1',
+			        activeIndex2: '1'
+			      };
+			    },
+			    methods: {
+			       handleSelect(key, keyPath) {
+			        console.log('++++',key, keyPath);
+			        if(key=='2-1'){
+			        	 console.log('----',key, keyPath);
+			        var myChart = echarts.init(document.getElementById('main')); 
+
+					var option = {
+					    title : {
+					        text: '温度'
+					    },
+					    tooltip : {
+					        trigger: 'axis'
+					    },
+					    legend: {
+					        data:['温度']
+					    },
+					    toolbox: {
+					        show : true,
+					        feature : {
+					            mark : {show: true},
+					            dataView : {show: true, readOnly: false},
+					            magicType : {show: true, type: ['line', 'bar']},
+					            restore : {show: true},
+					            saveAsImage : {show: true}
+					        }
+					    },
+					    dataZoom : {
+					        show : false,
+					        start : 0,
+					        end : 100
+					    },
+					    xAxis : [
+					        {
+					            type : 'category',
+					            boundaryGap : true,
+					            data : (function (){
+					                var now = new Date();
+					                var res = [];
+					                var len = 10;
+					                while (len--) {
+					                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+					                    now = new Date(now - 2000);
+					                }
+					                return res;
+					            })()
+					        }
+					      
+					    ],
+					    yAxis : [
+					        {
+					            type : 'value',
+								axisLabel : {
+									formatter: '{value} °C'
+							   }
+					        }
+					        
+					    ],
+					    series : [
+					        {
+					            name:'温度',
+					            type:'line',
+					            data:(function (){
+					                var res = [];
+					                var len = 10;
+					                while (len--) {
+					                    res.push((Math.random()*10 + 5).toFixed(1) - 0);
+					                }
+					                return res;
+					            })(),
+								 markPoint : {
+					                data : [
+					                    {type : 'max', name: '最大值'},
+					                    {type : 'min', name: '最小值'}
+					                ]
+					            },
+					            markLine : {
+					                data : [
+					                    {type : 'average', name: '平均值'}
+					                ]
+					            }
+					        }
+					    ]
+					};
+					var lastData = 11;
+					var axisData;
+					clearInterval(timeTicket);
+					var	timeTicket = setInterval(function (){
+						    lastData += Math.random() * ((Math.round(Math.random() * 10) % 2) == 0 ? 1 : -1);
+						    lastData = lastData.toFixed(1) - 0;
+						    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+						    
+						    // 动态数据接口 addData
+						    myChart.addData([
+						        [
+						            0,        // 系列索引
+						            Math.round(Math.random() * 40), // 新增数据
+						            true,     // 新增数据是否从队列头部插入
+						            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+						            axisData 
+						        ]
+						    ]);
+						}, 3000);
+					myChart.setOption(option); 
+             		
+			        	 
+			        }else if(key=='2-2'){
+			        	
+			        	var myChart = echarts.init(document.getElementById('main')); 
+
+						var option = {
+						    title : {
+						        text: '湿度'
+						    },
+						    tooltip : {
+						        trigger: 'axis'
+						    },
+						    legend: {
+						        data:['湿度']
+						    },
+						    toolbox: {
+						        show : true,
+						        feature : {
+						            mark : {show: true},
+						            dataView : {show: true, readOnly: false},
+						            magicType : {show: true, type: ['line', 'bar']},
+						            restore : {show: true},
+						            saveAsImage : {show: true}
+						        }
+						    },
+						    dataZoom : {
+						        show : false,
+						        start : 0,
+						        end : 100
+						    },
+						    xAxis : [
+						        {
+						            type : 'category',
+						            boundaryGap : true,
+						            data : (function (){
+						                var now = new Date();
+						                var res = [];
+						                var len = 10;
+						                while (len--) {
+						                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+						                    now = new Date(now - 2000);
+						                }
+						                return res;
+						            })()
+						        }
+						      
+						    ],
+						    yAxis : [
+						        {
+						            type : 'value',
+									axisLabel : {
+										formatter: '{value} %'
+								   }
+						        }
+						        
+						    ],
+						    series : [
+						        {
+						            name:'湿度',
+						            type:'line',
+						            data:(function (){
+						                var res = [];
+						                var len = 10;
+						                while (len--) {
+						                    res.push((Math.random()*10 + 5).toFixed(1) - 0);
+						                }
+						                return res;
+						            })(),
+									 markPoint : {
+						                data : [
+						                    {type : 'max', name: '最大值'},
+						                    {type : 'min', name: '最小值'}
+						                ]
+						            },
+						            markLine : {
+						                data : [
+						                    {type : 'average', name: '平均值'}
+						                ]
+						            }
+						        }
+						    ]
+						};
+						var lastData = 11;
+						var axisData;
+						clearInterval(timeTicket);
+						var	timeTicket = setInterval(function (){
+							    lastData += Math.random() * ((Math.round(Math.random() * 10) % 2) == 0 ? 1 : -1);
+							    lastData = lastData.toFixed(1) - 0;
+							    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+							    
+							    // 动态数据接口 addData
+							    myChart.addData([
+							        [
+							            0,        // 系列索引
+							            Math.round(Math.random() * 50), // 新增数据
+							            true,     // 新增数据是否从队列头部插入
+							            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+							            axisData 
+							        ]
+							    ]);
+							}, 3000);
+						myChart.setOption(option); 
+			        }else if(key=='2-3'){
+			        	var myChart = echarts.init(document.getElementById('main')); 
+
+					var option = {
+					    title : {
+					        text: '二氧化碳强度'
+					    },
+					    tooltip : {
+					        trigger: 'axis'
+					    },
+					    legend: {
+					        data:['二氧化碳强度']
+					    },
+					    toolbox: {
+					        show : true,
+					        feature : {
+					            mark : {show: true},
+					            dataView : {show: true, readOnly: false},
+					            magicType : {show: true, type: ['line', 'bar']},
+					            restore : {show: true},
+					            saveAsImage : {show: true}
+					        }
+					    },
+					    dataZoom : {
+					        show : false,
+					        start : 0,
+					        end : 100
+					    },
+					    xAxis : [
+					        {
+					            type : 'category',
+					            boundaryGap : true,
+					            data : (function (){
+					                var now = new Date();
+					                var res = [];
+					                var len = 10;
+					                while (len--) {
+					                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+					                    now = new Date(now - 2000);
+					                }
+					                return res;
+					            })()
+					        }
+					      
+					    ],
+					    yAxis : [
+					        {
+					            type : 'value',
+								axisLabel : {
+									formatter: '{value} %'
+							   }
+					        }
+					        
+					    ],
+					    series : [
+					        {
+					            name:'二氧化碳强度',
+					            type:'line',
+					            data:(function (){
+					                var res = [];
+					                var len = 10;
+					                while (len--) {
+					                    res.push((Math.random()*10 + 5).toFixed(1) - 0);
+					                }
+					                return res;
+					            })(),
+								 markPoint : {
+					                data : [
+					                    {type : 'max', name: '最大值'},
+					                    {type : 'min', name: '最小值'}
+					                ]
+					            },
+					            markLine : {
+					                data : [
+					                    {type : 'average', name: '平均值'}
+					                ]
+					            }
+					        }
+					    ]
+					};
+					var lastData = 11;
+					var axisData;
+					clearInterval(timeTicket);
+					var	timeTicket = setInterval(function (){
+						    lastData += Math.random() * ((Math.round(Math.random() * 10) % 2) == 0 ? 1 : -1);
+						    lastData = lastData.toFixed(1) - 0;
+						    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+						    
+						    // 动态数据接口 addData
+						    myChart.addData([
+						        [
+						            0,        // 系列索引
+						            Math.round(Math.random() * 40), // 新增数据
+						            true,     // 新增数据是否从队列头部插入
+						            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+						            axisData 
+						        ]
+						    ]);
+						}, 3000);
+					myChart.setOption(option); 
+             		
+			        	 
+			        }else{
+			        	
+			        	var myChart = echarts.init(document.getElementById('main')); 
+
+						var option = {
+						    title : {
+						        text: '光照强度'
+						    },
+						    tooltip : {
+						        trigger: 'axis'
+						    },
+						    legend: {
+						        data:['光照强度']
+						    },
+						    toolbox: {
+						        show : true,
+						        feature : {
+						            mark : {show: true},
+						            dataView : {show: true, readOnly: false},
+						            magicType : {show: true, type: ['line', 'bar']},
+						            restore : {show: true},
+						            saveAsImage : {show: true}
+						        }
+						    },
+						    dataZoom : {
+						        show : false,
+						        start : 0,
+						        end : 100
+						    },
+						    xAxis : [
+						        {
+						            type : 'category',
+						            boundaryGap : true,
+						            data : (function (){
+						                var now = new Date();
+						                var res = [];
+						                var len = 10;
+						                while (len--) {
+						                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+						                    now = new Date(now - 2000);
+						                }
+						                return res;
+						            })()
+						        }
+						      
+						    ],
+						    yAxis : [
+						        {
+						            type : 'value',
+									axisLabel : {
+										formatter: '{value} %'
+								   }
+						        }
+						        
+						    ],
+						    series : [
+						        {
+						            name:'光照强度',
+						            type:'line',
+						            data:(function (){
+						                var res = [];
+						                var len = 10;
+						                while (len--) {
+						                    res.push((Math.random()*10 + 5).toFixed(1) - 0);
+						                }
+						                return res;
+						            })(),
+									 markPoint : {
+						                data : [
+						                    {type : 'max', name: '最大值'},
+						                    {type : 'min', name: '最小值'}
+						                ]
+						            },
+						            markLine : {
+						                data : [
+						                    {type : 'average', name: '平均值'}
+						                ]
+						            }
+						        }
+						    ]
+						};
+						var lastData = 11;
+						var axisData;
+						clearInterval(timeTicket);
+						var	timeTicket = setInterval(function (){
+							    lastData += Math.random() * ((Math.round(Math.random() * 10) % 2) == 0 ? 1 : -1);
+							    lastData = lastData.toFixed(1) - 0;
+							    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+							    
+							    // 动态数据接口 addData
+							    myChart.addData([
+							        [
+							            0,        // 系列索引
+							            Math.round(Math.random() * 40), // 新增数据
+							            true,     // 新增数据是否从队列头部插入
+							            false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+							            axisData 
+							        ]
+							    ]);
+							}, 3000);
+						myChart.setOption(option); 
+			        }
+			      }
+			    }
+			})
+		</script>
+	</body>
+</html>
